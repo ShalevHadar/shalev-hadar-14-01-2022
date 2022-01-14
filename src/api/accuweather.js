@@ -15,12 +15,18 @@ export async function autocomplete(query) {
       item.Country.LocalizedName.indexOf(query)
   );
   return { data: mock };
-  // const response = await apiClient.get("locations/v1/cities/autocomplete", {
-  //   params: {
-  //     q: query,
-  //   },
-  // });
-  // return response;
+  const response = await apiClient.get("locations/v1/cities/autocomplete", {
+    params: {
+      q: query,
+    },
+  });
+  return response;
+}
+
+export async function getCurrentWeather(key) {
+  return { data: cityMock };
+  const response = await apiClient.get(`currentconditions/v1/${key}`);
+  return response;
 }
 
 const autocompleteMock = [
