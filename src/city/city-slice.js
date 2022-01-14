@@ -7,7 +7,7 @@ const initialState = {
 export const citySlice = createSlice({
   name: "city",
   initialState,
-  reducer: {
+  reducers: {
     setActiveCity: (state, action) => {
       state.activeCity = action.payload;
     },

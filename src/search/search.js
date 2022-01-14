@@ -1,10 +1,13 @@
 import { Autocomplete, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { autocomplete } from "../api/accuweather";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import * as accuweather from "../api/accuweather";
+import { clearActiveCity, setActiveCity } from "../city/city-slice";
 
 export function Search() {
   const [options, setOptions] = useState([]);
+  const dispatch = useDispatch();
+
   const handleInputChange = async (event, value, reason) => {
     if (reason === "input") {
       const response = await accuweather.autocomplete(value);
@@ -20,10 +23,22 @@ export function Search() {
     }
   };
 
-  const handleChange = (event, value, reason) => {
+  const handleChange = (event, city, reason) => {
     //console.log(value, reason);
-    if (reason === "selectOption") {
-      console.log(value);
+
+    const handlers = {
+      selectOption: () => {
+        if (city) {
+          dispatch(setActiveCity(city));
+        }
+      },
+      clear: () => {
+        dispatch(clearActiveCity());
+      },
+    };
+    const handler = handlers[reason];
+    if (handler) {
+      handler();
     }
   };
 
