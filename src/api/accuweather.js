@@ -9,12 +9,12 @@ const apiClient = axios.create({
 });
 
 export async function autocomplete(query) {
-  const mock = autocompleteMock.filter(
-    (item) =>
-      item.LocalizedName.indexOf(query) ||
-      item.Country.LocalizedName.indexOf(query)
-  );
-  return { data: mock };
+  // const mock = autocompleteMock.filter(
+  //   (item) =>
+  //     item.LocalizedName.indexOf(query) ||
+  //     item.Country.LocalizedName.indexOf(query)
+  // );
+  // return { data: mock };
   const response = await apiClient.get("locations/v1/cities/autocomplete", {
     params: {
       q: query,
@@ -24,8 +24,18 @@ export async function autocomplete(query) {
 }
 
 export async function getCurrentWeather(key) {
-  return { data: cityMock };
+  //return { data: cityMock };
   const response = await apiClient.get(`currentconditions/v1/${key}`);
+  return response;
+}
+
+export async function getFiveDaysDailyForecast(key, metric = true) {
+  //return { data: fiveDaysDailyForecastMock };
+  const response = await apiClient.get(`forecasts/v1/daily/5day/${key}`, {
+    params: {
+      metric,
+    },
+  });
   return response;
 }
 
@@ -209,7 +219,7 @@ const cityMock = [
   },
 ];
 
-const fiveDaysDailyForcastMock = {
+const fiveDaysDailyForecastMock = {
   Headline: {
     EffectiveDate: "2022-01-14T13:00:00+02:00",
     EffectiveEpochDate: 1642158000,
