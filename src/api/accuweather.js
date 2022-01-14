@@ -15,6 +15,13 @@ export async function autocomplete(query) {
       item.Country.LocalizedName.indexOf(query)
   );
   return { data: mock };
+  // for not mock
+  const response = await apiClient.get("locations/v1/cities/autocomplete", {
+    params: {
+      q: query,
+    },
+  });
+  return response;
 }
 
 const autocompleteMock = [
