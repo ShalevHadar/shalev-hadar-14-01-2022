@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "dataservice.accuweather.com",
+  baseURL: "http://dataservice.accuweather.com",
   params: {
-    apiKey: process.env.REACT_APP_ACCUWEATHER_API_KEY,
+    apikey: process.env.REACT_APP_ACCUWEATHER_API_KEY,
   },
   validateStatus: (status) => status < 400,
 });
@@ -15,13 +15,12 @@ export async function autocomplete(query) {
       item.Country.LocalizedName.indexOf(query)
   );
   return { data: mock };
-  // for not mock
-  const response = await apiClient.get("locations/v1/cities/autocomplete", {
-    params: {
-      q: query,
-    },
-  });
-  return response;
+  // const response = await apiClient.get("locations/v1/cities/autocomplete", {
+  //   params: {
+  //     q: query,
+  //   },
+  // });
+  // return response;
 }
 
 const autocompleteMock = [
