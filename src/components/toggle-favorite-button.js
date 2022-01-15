@@ -13,11 +13,8 @@ export function ToggleFavorite({ cityId }) {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    if (!isFavorite) {
-      dispatch(addToFavorites(cityId));
-    } else {
-      dispatch(removeFromFavorites(cityId));
-    }
+    const action = isFavorite ? removeFromFavorites : addToFavorites;
+    dispatch(action(cityId));
   };
 
   return (
