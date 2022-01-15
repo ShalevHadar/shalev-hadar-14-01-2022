@@ -2,23 +2,27 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { AppBar, Button, Container } from "@mui/material";
 import CloudIcon from "@mui/icons-material/Cloud";
+import { Box } from "@mui/system";
 
 export function Layout({ children }) {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <Box>
       <AppBar position="static">
         <Container
           style={{
-            height: 60,
+            height: 56,
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
           }}
         >
-          <div>{<CloudIcon />} Weatherman</div>
-          <div>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <CloudIcon />
+            <Box sx={{ ml: 1 }}>Weatherman</Box>
+          </Box>
+          <Box>
             <Button
               sx={{ textTransform: "none", color: "#fff" }}
               variant="text"
@@ -34,10 +38,10 @@ export function Layout({ children }) {
             >
               Favorites
             </Button>
-          </div>
+          </Box>
         </Container>
       </AppBar>
       <Container>{children}</Container>
-    </div>
+    </Box>
   );
 }
