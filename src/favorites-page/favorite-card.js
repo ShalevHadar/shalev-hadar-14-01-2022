@@ -8,7 +8,7 @@ import {
 import React from "react";
 import { useCurrentWeather } from "../use-current-weather";
 
-export function FavoriteCard({ city }) {
+export function FavoriteCard({ city, onClick }) {
   const cityWeather = useCurrentWeather(city.id);
   const loading = !cityWeather;
 
@@ -21,7 +21,7 @@ export function FavoriteCard({ city }) {
   }
 
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" onClick={onClick} sx={{ width: "184px" }}>
       <CardContent
         sx={{
           display: "flex",
@@ -30,7 +30,9 @@ export function FavoriteCard({ city }) {
           alignItems: "center",
         }}
       >
-        <Typography variant="h6">{city.name}</Typography>
+        <Typography variant="h6" textAlign="center">
+          {city.name}
+        </Typography>
         <Typography sx={{ mt: ".5rem", mb: "0.2rem" }}>
           {cityWeather.temperature.celsius}&deg;
         </Typography>

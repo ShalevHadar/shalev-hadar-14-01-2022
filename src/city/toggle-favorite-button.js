@@ -23,7 +23,7 @@ export function ToggleFavorite({ cityId }) {
     <Button
       size="large"
       sx={{ textTransform: "none" }}
-      startIcon={isFavorite ? <FavoriteBorderIcon /> : <FavoriteIcon />}
+      startIcon={isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
       aria-label="toggle favorites"
       onClick={handleClick}
     >
