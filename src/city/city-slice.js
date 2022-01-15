@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  activeCityId: null,
+  activeCityId: 215854,
   favorites: [],
-  cities: {}, // id, name
+  cities: { 215854: { id: 215854, name: "Tel Aviv" } }, // id, name
 };
 
 export const citySlice = createSlice({
