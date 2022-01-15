@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import React from "react";
 import { FavoriteCard } from "./favorite-card";
-import { Box } from "@mui/material";
+import { Box, Card, CardContent } from "@mui/material";
 import { setActiveCity } from "../city/city-slice";
 import { useNavigate } from "react-router-dom";
 
@@ -20,18 +20,22 @@ export function FavoriteCards() {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        columnGap: "1rem",
-      }}
-    >
-      {favorites.map((favorite) => (
-        <Box key={favorite} onClick={() => handleSelect(favorite)}>
-          <FavoriteCard city={cities[favorite]} />
+    <Card variant="outlined">
+      <CardContent>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            columnGap: "1rem",
+          }}
+        >
+          {favorites.map((favorite) => (
+            <div key={favorite} onClick={() => handleSelect(favorite)}>
+              <FavoriteCard city={cities[favorite]} />
+            </div>
+          ))}
         </Box>
-      ))}
-    </Box>
+      </CardContent>
+    </Card>
   );
 }
