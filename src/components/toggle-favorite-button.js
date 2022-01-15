@@ -24,7 +24,7 @@ export function ToggleFavorite({ cityId }) {
       variant="contained"
       onClick={handleClick}
       style={{ textTransform: "none" }}
-      sx={{ height: 55 }}
+      sx={{ height: 45 }}
     >
       {isKeyInsideFavorites ? (
         <Box sx={{ display: "flex" }}>
