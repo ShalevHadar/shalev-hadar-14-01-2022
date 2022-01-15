@@ -1,18 +1,19 @@
 import React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Button, Typography } from "@mui/material";
+import { Button, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useSelector, useDispatch } from "react-redux";
 import { addToFavorites, removeFromFavorites } from "../city/city-slice";
 
 export function ToggleFavorite({ cityId }) {
-  const favorites = useSelector((state) => state.city.favorites);
+  const isFavorite = useSelector((state) =>
+    state.city.favorites.includes(cityId)
+  );
   const dispatch = useDispatch();
-  const isKeyInsideFavorites = favorites.includes(cityId);
 
   const handleClick = () => {
-    if (!isKeyInsideFavorites) {
+    if (!isFavorite) {
       dispatch(addToFavorites(cityId));
     } else {
       dispatch(removeFromFavorites(cityId));
@@ -21,22 +22,13 @@ export function ToggleFavorite({ cityId }) {
 
   return (
     <Button
-      variant="contained"
+      size="large"
+      sx={{ textTransform: "none" }}
+      startIcon={isFavorite ? <FavoriteBorderIcon /> : <FavoriteIcon />}
+      aria-label="toggle favorites"
       onClick={handleClick}
-      style={{ textTransform: "none" }}
-      sx={{ height: 45 }}
     >
-      {isKeyInsideFavorites ? (
-        <Box sx={{ display: "flex" }}>
-          <FavoriteBorderIcon sx={{ mr: 1 }} />
-          <Typography>Remove from Favorites</Typography>
-        </Box>
-      ) : (
-        <Box sx={{ display: "flex" }}>
-          <FavoriteIcon sx={{ mr: 1 }} />
-          <Typography>Add to Favorites</Typography>
-        </Box>
-      )}
+      {isFavorite ? "Remove from favorites" : "Add to favorites"}
     </Button>
   );
 }
