@@ -1,10 +1,12 @@
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   getCurrentWeather,
   getFiveDaysDailyForecast,
 } from "../api/accuweather";
+import { DayForecastCard } from "../components/day-forecast-card";
 import { CityDetails } from "./city-details";
 import { Forecasts } from "./forecasts";
 
@@ -64,15 +66,38 @@ export function City() {
 
   return (
     <div>
-      <header>
+      <Box
+        component="header"
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <CityDetails city={activeCity} currentWeather={currentWeather} />
-      </header>
-      <div>
+        <h1>Like Button</h1>
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <h2>{currentWeather.description}</h2>
-      </div>
-      <div>
-        <Forecasts forecasts={forecasts} />
-      </div>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          bgcolor: "background.paper",
+        }}
+      >
+        {forecasts.map((day) => (
+          <Grid item key={day.date}>
+            <DayForecastCard day={day} />
+          </Grid>
+        ))}
+      </Box>
     </div>
   );
 }

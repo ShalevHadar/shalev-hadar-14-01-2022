@@ -1,7 +1,11 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import React from "react";
 
-export function Forecastcard({ city, currentWeather }) {
+export function DayForecastCard({ day }) {
+  const label = day.date.toLocaleDateString("en-US", { weekday: "long" });
+  const temperature = Math.round(
+    (day.temperature.max + day.temperature.min) / 2
+  );
   return (
     <Card
       variant="outlined"
@@ -18,17 +22,17 @@ export function Forecastcard({ city, currentWeather }) {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          height: 180,
         }}
       >
-        <Typography variant="h5">{city?.name}</Typography>
-        <div>{currentWeather?.description}</div>
+        <Typography variant="h5">{label}</Typography>
 
         <CardMedia
           component="img"
-          image={`/assets/${currentWeather?.icon}.png`}
+          image={`/assets/${day.dayIcon}.png`}
           sx={{ width: 110 }}
         />
-        <div>Current temp: {currentWeather?.temperature.celsius} &deg;</div>
+        <div>Temperature: {temperature}&deg;</div>
       </CardContent>
     </Card>
   );
