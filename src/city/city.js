@@ -1,4 +1,4 @@
-import { CircularProgress, Grid } from "@mui/material";
+import { CircularProgress, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -83,14 +83,17 @@ export function City() {
         sx={{
           display: "flex",
           justifyContent: "center",
+          mt: 10,
+          mb: 10,
         }}
       >
-        <h2>{currentWeather.description}</h2>
+        <Typography variant="h4">{currentWeather.description}</Typography>
       </Box>
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-evenly",
+          justifyContent: "center",
+          columnGap: "1rem",
         }}
       >
         {forecasts.map((day) => (
