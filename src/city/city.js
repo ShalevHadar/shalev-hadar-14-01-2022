@@ -89,7 +89,6 @@ export function City() {
         sx={{
           display: "flex",
           justifyContent: "space-evenly",
-          bgcolor: "background.paper",
         }}
       >
         {forecasts.map((day) => (
