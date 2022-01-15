@@ -1,11 +1,21 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React from "react";
-import { Forecastcard } from "../components/forecast-card";
 
 export function CityDetails({ city, currentWeather }) {
   return (
-    <div>
-      <Forecastcard city={city} currentWeather={currentWeather} />
-    </div>
+    <Box sx={{ display: "flex", alignItems: "center" }}>
+      <img
+        src={`/assets/${currentWeather.icon}.png`}
+        alt={currentWeather.description}
+        width="120"
+      />
+      <Box>
+        <Typography variant="h5">{city.name}</Typography>
+        <Typography>
+          Temp: {currentWeather.temperature.celsius} &deg;
+        </Typography>
+      </Box>
+    </Box>
   );
 }
