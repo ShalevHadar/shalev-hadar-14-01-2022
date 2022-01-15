@@ -18,8 +18,10 @@ import { CityDetails } from "./city-details";
 export function City() {
   const [currentWeather, setCurrentWeather] = useState();
   const [forecasts, setForecasts] = useState();
-  const activeCity = useSelector((state) => state.city.activeCity);
-  const activeCityId = activeCity?.id;
+  const { activeCityId, activeCity } = useSelector((state) => ({
+    activeCityId: state.city.activeCityId,
+    activeCity: state.city.cities[state.city.activeCityId],
+  }));
   const loading = !currentWeather || !forecasts;
 
   // getting current city weather

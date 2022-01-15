@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  activeCity: null,
+  activeCityId: null,
+  cities: {},
 };
 
 export const citySlice = createSlice({
@@ -9,10 +10,12 @@ export const citySlice = createSlice({
   initialState,
   reducers: {
     setActiveCity: (state, action) => {
-      state.activeCity = action.payload;
+      const city = action.payload;
+      state.activeCityId = city.id;
+      state.cities[city.id] = city;
     },
     clearActiveCity: (state) => {
-      state.activeCity = null;
+      state.activeCityId = null;
     },
   },
 });
