@@ -1,7 +1,7 @@
 import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getCurrentWeather,
   getFiveDaysDailyForecast,
@@ -9,10 +9,12 @@ import {
 import { DayForecastCard } from "../components/day-forecast-card";
 import { ToggleFavorite } from "../components/toggle-favorite-button";
 import { CityDetails } from "./city-details";
+import { setActiveCity } from "./city-slice";
 
 export function City() {
   const [currentWeather, setCurrentWeather] = useState();
   const [forecasts, setForecasts] = useState();
+  const dispatch = useDispatch();
   const { activeCityId, activeCity } = useSelector((state) => ({
     activeCityId: state.city.activeCityId,
     activeCity: state.city.cities[state.city.activeCityId],
@@ -63,6 +65,7 @@ export function City() {
   }, [activeCityId]);
 
   if (!activeCity) {
+    dispatch(setActiveCity({ id: "215854", name: "Tel Aviv" }));
     return null;
   }
   if (loading) {
