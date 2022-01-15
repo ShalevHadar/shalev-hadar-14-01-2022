@@ -1,13 +1,6 @@
 import React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import {
-  Button,
-  IconButton,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import { Box } from "@mui/system";
+import { Button, useMediaQuery, useTheme } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useSelector, useDispatch } from "react-redux";
 import { addToFavorites, removeFromFavorites } from "../city/city-slice";
