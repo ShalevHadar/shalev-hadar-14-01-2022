@@ -1,4 +1,10 @@
-import { CircularProgress, Grid, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CircularProgress,
+  Grid,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -67,39 +73,41 @@ export function City() {
   }
 
   return (
-    <div>
-      <Box
-        component="header"
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <CityDetails city={activeCity} currentWeather={currentWeather} />
-        <h1>Like Button</h1>
-      </Box>
+    <Card variant="outlined" sx={{ mt: 3 }}>
+      <CardContent>
+        <Box
+          component="header"
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <CityDetails city={activeCity} currentWeather={currentWeather} />
+          <h1>Like Button</h1>
+        </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          mt: 10,
-          mb: 10,
-        }}
-      >
-        <Typography variant="h4">{currentWeather.description}</Typography>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          columnGap: "1rem",
-        }}
-      >
-        {forecasts.map((day) => (
-          <DayForecastCard key={day.date} day={day} />
-        ))}
-      </Box>
-    </div>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: 10,
+            mb: 10,
+          }}
+        >
+          <Typography variant="h4">{currentWeather.description}</Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            columnGap: "1rem",
+          }}
+        >
+          {forecasts.map((day) => (
+            <DayForecastCard key={day.date} day={day} />
+          ))}
+        </Box>
+      </CardContent>
+    </Card>
   );
 }
