@@ -73,7 +73,7 @@ export function City() {
   }
 
   return (
-    <Card variant="outlined" sx={{ mt: 3 }}>
+    <Card variant="outlined">
       <CardContent>
         <Box
           component="header"
