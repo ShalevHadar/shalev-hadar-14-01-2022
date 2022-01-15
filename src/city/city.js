@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CircularProgress,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -13,13 +7,16 @@ import {
   getFiveDaysDailyForecast,
 } from "../api/accuweather";
 import { DayForecastCard } from "../components/day-forecast-card";
+import { ToggleFavorite } from "../components/toggle-favorite-button";
 import { CityDetails } from "./city-details";
 
 export function City() {
   const [currentWeather, setCurrentWeather] = useState();
   const [forecasts, setForecasts] = useState();
-  const activeCity = useSelector((state) => state.city.activeCity);
-  const activeCityId = activeCity?.id;
+  const { activeCityId, activeCity } = useSelector((state) => ({
+    activeCityId: state.city.activeCityId,
+    activeCity: state.city.cities[state.city.activeCityId],
+  }));
   const loading = !currentWeather || !forecasts;
 
   // getting current city weather
@@ -83,7 +80,7 @@ export function City() {
           }}
         >
           <CityDetails city={activeCity} currentWeather={currentWeather} />
-          <h1>Like Button</h1>
+          <ToggleFavorite cityId={activeCityId} />
         </Box>
 
         <Box

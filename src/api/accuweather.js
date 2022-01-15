@@ -39,6 +39,7 @@ export async function getFiveDaysDailyForecast(key, metric = true) {
   return response;
 }
 
+
 const autocompleteMock = [
   {
     Version: 1,
