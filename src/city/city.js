@@ -65,9 +65,9 @@ export function City() {
   }, [activeCityId]);
 
   if (!activeCity) {
-    dispatch(setActiveCity({ id: "215854", name: "Tel Aviv" }));
     return null;
   }
+
   if (loading) {
     return <CircularProgress />;
   }
