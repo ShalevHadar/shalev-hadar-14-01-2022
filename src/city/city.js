@@ -1,67 +1,22 @@
 import { styled } from "@mui/material/styles";
 import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import {
-  getCurrentWeather,
-  getFiveDaysDailyForecast,
-} from "../api/accuweather";
 import { DayForecastCard } from "../components/day-forecast-card";
 import { ToggleFavorite } from "../components/toggle-favorite-button";
 import { CityDetails } from "./city-details";
+import { useCurrentWeather } from "../use-current-weather";
+import { useFiveDaysForecast } from "../use-five-days-forecast";
 
 export function City() {
-  const [currentWeather, setCurrentWeather] = useState();
-  const [forecasts, setForecasts] = useState();
   const { activeCityId, activeCity } = useSelector((state) => ({
     activeCityId: state.city.activeCityId,
     activeCity: state.city.cities[state.city.activeCityId],
   }));
-  const loading = !currentWeather || !forecasts;
-
-  // getting current city weather
-  useEffect(() => {
-    const updateCurrentWeather = async () => {
-      const {
-        data: [weather],
-      } = await getCurrentWeather(activeCityId);
-      setCurrentWeather({
-        description: weather.WeatherText,
-        icon: weather.WeatherIcon,
-        temperature: {
-          fahrenheit: weather.Temperature.Imperial.Value,
-          celsius: weather.Temperature.Metric.Value,
-        },
-      });
-    };
-    if (activeCityId) {
-      updateCurrentWeather();
-    }
-  }, [activeCityId]);
-
-  // getting 5 days forecast
-  useEffect(() => {
-    const updateForecast = async () => {
-      const {
-        data: { DailyForecasts: forecasts },
-      } = await getFiveDaysDailyForecast(activeCityId);
-      setForecasts(
-        forecasts.map((forecast) => ({
-          date: new Date(forecast.Date),
-          temperature: {
-            min: forecast.Temperature.Minimum.Value,
-            max: forecast.Temperature.Maximum.Value,
-          },
-          dayIcon: forecast.Day.Icon,
-          nightIcon: forecast.Night.Icon,
-        }))
-      );
-    };
-    if (activeCityId) {
-      updateForecast();
-    }
-  }, [activeCityId]);
+  const forecast = useFiveDaysForecast(activeCityId);
+  const currentWeather = useCurrentWeather(activeCityId);
+  const loading = !currentWeather || !forecast;
 
   if (!activeCity) {
     return null;
@@ -96,7 +51,7 @@ export function City() {
           <Typography variant="h4">{currentWeather.description}</Typography>
         </Box>
         <DayForecastCardListBox>
-          {forecasts.map((day) => (
+          {forecast.map((day) => (
             <DayForecastCard key={day.date} day={day} />
           ))}
         </DayForecastCardListBox>

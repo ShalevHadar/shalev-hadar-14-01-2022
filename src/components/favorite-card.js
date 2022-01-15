@@ -5,36 +5,17 @@ import {
   CircularProgress,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { getCurrentWeather } from "../api/accuweather";
+import React from "react";
+import { useCurrentWeather } from "../use-current-weather";
 
 export function FavoriteCard({ city }) {
-  const [cityWeather, setCityWeather] = useState();
-  const cityId = city.id;
+  const cityWeather = useCurrentWeather(city.id);
   const loading = !cityWeather;
-
-  useEffect(() => {
-    const getFavoriteCityData = async () => {
-      const {
-        data: [cityWeather],
-      } = await getCurrentWeather(cityId);
-      setCityWeather({
-        description: cityWeather.WeatherText,
-        icon: cityWeather.WeatherIcon,
-        temperature: {
-          fahrenheit: cityWeather.Temperature.Imperial.Value,
-          celsius: cityWeather.Temperature.Metric.Value,
-        },
-      });
-    };
-    if (cityId) {
-      getFavoriteCityData();
-    }
-  }, [cityId]);
 
   if (!city) {
     return null;
   }
+
   if (loading) {
     return <CircularProgress />;
   }
