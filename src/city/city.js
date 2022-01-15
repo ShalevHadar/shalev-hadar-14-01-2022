@@ -1,3 +1,4 @@
+import { styled } from "@mui/material/styles";
 import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
@@ -96,18 +97,24 @@ export function City() {
         >
           <Typography variant="h4">{currentWeather.description}</Typography>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            columnGap: "1rem",
-          }}
-        >
+        <DayForecastCardListBox>
           {forecasts.map((day) => (
             <DayForecastCard key={day.date} day={day} />
           ))}
-        </Box>
+        </DayForecastCardListBox>
       </CardContent>
     </Card>
   );
 }
+
+const DayForecastCardListBox = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  columnGap: theme.spacing(2),
+  [theme.breakpoints.between("xs", "sm")]: {
+    flexDirection: "column",
+  },
+  [theme.breakpoints.up("sm")]: {
+    flexDirection: "row",
+  },
+}));

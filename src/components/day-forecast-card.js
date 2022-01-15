@@ -9,6 +9,7 @@ export function DayForecastCard({ day }) {
   return (
     <Card variant="outlined">
       <CardContent
+        
         sx={{
           display: "flex",
           flexDirection: "column",
