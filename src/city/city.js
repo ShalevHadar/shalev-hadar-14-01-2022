@@ -8,7 +8,6 @@ import {
 } from "../api/accuweather";
 import { DayForecastCard } from "../components/day-forecast-card";
 import { CityDetails } from "./city-details";
-import { Forecasts } from "./forecasts";
 
 export function City() {
   const [currentWeather, setCurrentWeather] = useState();
@@ -60,8 +59,11 @@ export function City() {
     }
   }, [activeCityId]);
 
+  if (!activeCity) {
+    return null;
+  }
   if (loading) {
-    return <div>{activeCityId ? <CircularProgress /> : ""}</div>;
+    return <CircularProgress />;
   }
 
   return (
@@ -92,9 +94,7 @@ export function City() {
         }}
       >
         {forecasts.map((day) => (
-          <Grid item key={day.date}>
-            <DayForecastCard day={day} />
-          </Grid>
+          <DayForecastCard key={day.date} day={day} />
         ))}
       </Box>
     </div>
