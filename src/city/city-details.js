@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 
-export function CityDetails({ city, currentWeather }) {
+export function CityDetails({ name, currentWeather }) {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <img
@@ -11,7 +11,7 @@ export function CityDetails({ city, currentWeather }) {
         width="120"
       />
       <Box>
-        <Typography variant="h5">{city.name}</Typography>
+        <Typography variant="h5">{name}</Typography>
         <Typography>
           Temp: {currentWeather.temperature.celsius} &deg;
         </Typography>

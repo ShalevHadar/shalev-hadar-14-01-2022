@@ -18,10 +18,7 @@ import { CityDetails } from "./city-details";
 export function City() {
   const [currentWeather, setCurrentWeather] = useState();
   const [forecasts, setForecasts] = useState();
-  const { activeCityId, activeCity } = useSelector((state) => ({
-    activeCityId: state.city.activeCityId,
-    activeCity: state.city.cities[state.city.activeCityId],
-  }));
+  const activeCity = useSelector((state) => state.city.activeCity);
   const loading = !currentWeather || !forecasts;
 
   // getting current city weather
@@ -29,7 +26,7 @@ export function City() {
     const updateCurrentWeather = async () => {
       const {
         data: [weather],
-      } = await getCurrentWeather(activeCityId);
+      } = await getCurrentWeather(activeCity?.id);
       setCurrentWeather({
         description: weather.WeatherText,
         icon: weather.WeatherIcon,
@@ -39,17 +36,17 @@ export function City() {
         },
       });
     };
-    if (activeCityId) {
+    if (activeCity?.id) {
       updateCurrentWeather();
     }
-  }, [activeCityId]);
+  }, [activeCity?.id]);
 
   // getting 5 days forecast
   useEffect(() => {
     const updateForecast = async () => {
       const {
         data: { DailyForecasts: forecasts },
-      } = await getFiveDaysDailyForecast(activeCityId);
+      } = await getFiveDaysDailyForecast(activeCity?.id);
       setForecasts(
         forecasts.map((forecast) => ({
           date: new Date(forecast.Date),
@@ -62,10 +59,10 @@ export function City() {
         }))
       );
     };
-    if (activeCityId) {
+    if (activeCity?.id) {
       updateForecast();
     }
-  }, [activeCityId]);
+  }, [activeCity?.id]);
 
   if (!activeCity) {
     return null;
@@ -84,7 +81,7 @@ export function City() {
             justifyContent: "space-between",
           }}
         >
-          <CityDetails city={activeCity} currentWeather={currentWeather} />
+          <CityDetails name={activeCity.name} currentWeather={currentWeather} />
           <h1>Like Button</h1>
         </Box>
 
