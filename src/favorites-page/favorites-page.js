@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "../components/layout";
-import { FavoriteCards } from "../components/favorites";
+import { FavoriteCards } from "./favorites";
 import { Box } from "@mui/system";
 
 export function Favorites() {

@@ -3,7 +3,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Button, useMediaQuery, useTheme } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useSelector, useDispatch } from "react-redux";
-import { addToFavorites, removeFromFavorites } from "../city/city-slice";
+import { addToFavorites, removeFromFavorites } from "./city-slice";
 
 export function ToggleFavorite({ cityId }) {
   const theme = useTheme();

@@ -3,11 +3,11 @@ import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { useSelector } from "react-redux";
-import { DayForecastCard } from "../components/day-forecast-card";
-import { ToggleFavorite } from "../components/toggle-favorite-button";
 import { CityDetails } from "./city-details";
 import { useCurrentWeather } from "../use-current-weather";
 import { useFiveDaysForecast } from "../use-five-days-forecast";
+import { DayForecastCard } from "../favorites-page/day-forecast-card";
+import { ToggleFavorite } from "./toggle-favorite-button";
 
 export function City() {
   const { activeCityId, activeCity } = useSelector((state) => ({
