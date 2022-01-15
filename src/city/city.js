@@ -8,6 +8,7 @@ import { useCurrentWeather } from "../use-current-weather";
 import { useFiveDaysForecast } from "../use-five-days-forecast";
 import { DayForecastCard } from "../favorites-page/day-forecast-card";
 import { ToggleFavorite } from "./toggle-favorite-button";
+import { CardList } from "../components/card-list";
 
 export function City() {
   const { activeCityId, activeCity } = useSelector((state) => ({
@@ -50,24 +51,12 @@ export function City() {
         >
           <Typography variant="h4">{currentWeather.description}</Typography>
         </Box>
-        <DayForecastCardListBox>
+        <CardList>
           {forecast.map((day) => (
             <DayForecastCard key={day.date} day={day} />
           ))}
-        </DayForecastCardListBox>
+        </CardList>
       </CardContent>
     </Card>
   );
 }
-
-const DayForecastCardListBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  columnGap: theme.spacing(2),
-  [theme.breakpoints.between("xs", "sm")]: {
-    flexDirection: "column",
-  },
-  [theme.breakpoints.up("sm")]: {
-    flexDirection: "row",
-  },
-}));

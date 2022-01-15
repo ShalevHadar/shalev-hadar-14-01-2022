@@ -7,7 +7,7 @@ export function DayForecastCard({ day }) {
     (day.temperature.max + day.temperature.min) / 2
   );
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" sx={{ width: "184px" }}>
       <CardContent
         sx={{
           display: "flex",
