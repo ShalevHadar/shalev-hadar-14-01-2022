@@ -46,7 +46,7 @@ export function Search() {
     const handlers = {
       selectOption: () => {
         if (city) {
-          dispatch(setActiveCity(city));
+          dispatch(setActiveCity({ id: city.id, name: city.name }));
         }
       },
       clear: () => {
