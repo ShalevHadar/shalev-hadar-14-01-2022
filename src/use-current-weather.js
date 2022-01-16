@@ -2,26 +2,31 @@ import { useEffect, useState } from "react";
 import { getCurrentWeather } from "./api/accuweather";
 
 export function useCurrentWeather(cityId) {
-  const [cityWeather, setCityWeather] = useState();
+  const [currentWeather, setCurrentWeather] = useState();
+  const [error, setError] = useState();
 
   useEffect(() => {
     const getCurrentCityWeather = async () => {
-      const {
-        data: [cityWeather],
-      } = await getCurrentWeather(cityId);
-      setCityWeather({
-        description: cityWeather.WeatherText,
-        icon: cityWeather.WeatherIcon,
-        temperature: {
-          fahrenheit: cityWeather.Temperature.Imperial.Value,
-          celsius: cityWeather.Temperature.Metric.Value,
-        },
-      });
+      try {
+        const {
+          data: [cityWeather],
+        } = await getCurrentWeather(cityId);
+        setCurrentWeather({
+          description: cityWeather.WeatherText,
+          icon: cityWeather.WeatherIcon,
+          temperature: {
+            fahrenheit: cityWeather.Temperature.Imperial.Value,
+            celsius: cityWeather.Temperature.Metric.Value,
+          },
+        });
+      } catch (error) {
+        setError(`Couldn't load current city weather`);
+      }
     };
     if (cityId) {
       getCurrentCityWeather();
     }
   }, [cityId]);
 
-  return cityWeather;
+  return { currentWeather, error };
 }

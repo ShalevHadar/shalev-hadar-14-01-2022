@@ -11,7 +11,7 @@ export function CityDetails({ city, currentWeather }) {
         width="120"
       />
       <Box>
-        <Typography variant="h5">{city.name}</Typography>
+        <Typography variant="h5">{city?.name}</Typography>
         <Typography>
           Temp: {currentWeather.temperature.celsius} &deg;
         </Typography>
