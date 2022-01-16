@@ -4,19 +4,16 @@ import { useDispatch } from "react-redux";
 import * as accuweather from "../api/accuweather";
 import { clearActiveCity, setActiveCity } from "../city/city-slice";
 import { useDebounceTime } from "../components/debounce";
-import { useCustomizedSnackbar } from "../components/use-snack-bar";
+import { NotificationSnackBar } from "../components/notification-snack-bar";
 import { validate } from "../components/validate-regex";
 
 export function Search() {
   const [options, setOptions] = useState([]);
   const [val, setDebounced] = useDebounceTime(450);
   const [errorMsg, setErrorMsg] = useState("");
-  const dispatch = useDispatch();
+  const [error, setError] = useState();
 
-  const mySnack = useCustomizedSnackbar(
-    "API fail, please enter another key",
-    "error"
-  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (val) {
@@ -27,25 +24,30 @@ export function Search() {
   }, [val]);
 
   const getAutocompleteCities = async (value) => {
-    if (!value) {
-      return;
+    try {
+      if (!value) {
+        return;
+      }
+      const response = await accuweather.autocomplete(value);
+      const nextOptions = response.data.map((location) => {
+        return {
+          id: location.Key,
+          name: location.LocalizedName,
+          area: location.AdministrativeArea.LocalizedName,
+          country: location.Country.LocalizedName,
+        };
+      });
+      setOptions(nextOptions);
+    } catch (error) {
+      setError(`Couldn't search for cities`);
     }
-    const response = await accuweather.autocomplete(value);
-    const nextOptions = response.data.map((location) => {
-      return {
-        id: location.Key,
-        name: location.LocalizedName,
-        area: location.AdministrativeArea.LocalizedName,
-        country: location.Country.LocalizedName,
-      };
-    });
-    setOptions(nextOptions);
   };
 
   // on input, get autocomplete by the value
   const handleInputChange = async (event, value, reason) => {
+    setErrorMsg(undefined);
     if (reason === "input" && validate(value)) {
-      setErrorMsg("");
+      setError(undefined);
       setDebounced(value);
     } else {
       setErrorMsg("Only english letters are allowed");
@@ -82,11 +84,23 @@ export function Search() {
           `${option.name}, ${option.country} (${option.area})`
         }
         renderInput={(params) => (
-          <TextField {...params} placeholder="Enter city" />
+          <TextField
+            {...params}
+            placeholder="Enter city"
+            error={Boolean(error)}
+            helperText={error}
+          />
         )}
         onInputChange={handleInputChange}
         onChange={handleChange}
       />
+      {error && (
+        <NotificationSnackBar
+          message={error}
+          severity="error"
+          active={Boolean(error)}
+        />
+      )}
     </div>
   );
 }
