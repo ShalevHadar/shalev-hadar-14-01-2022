@@ -9,10 +9,10 @@ import React from "react";
 import { useCurrentWeather } from "../use-current-weather";
 
 export function FavoriteCard({ city, onClick }) {
-  const cityWeather = useCurrentWeather(city.id);
-  const loading = !cityWeather;
+  const { cityWeather: currentWeather, error } = useCurrentWeather(city.id);
+  const loading = !currentWeather;
 
-  if (!city) {
+  if (!city || error) {
     return null;
   }
 
@@ -34,14 +34,14 @@ export function FavoriteCard({ city, onClick }) {
           {city.name}
         </Typography>
         <Typography sx={{ mt: ".5rem", mb: "0.2rem" }}>
-          {cityWeather.temperature.celsius}&deg;
+          {currentWeather.temperature.celsius}&deg;
         </Typography>
         <CardMedia
           component="img"
-          image={`/assets/${cityWeather.icon}.png`}
+          image={`/assets/${currentWeather.icon}.png`}
           sx={{ width: 110 }}
         />
-        <Typography>{cityWeather?.description}</Typography>
+        <Typography>{currentWeather?.description}</Typography>
       </CardContent>
     </Card>
   );
