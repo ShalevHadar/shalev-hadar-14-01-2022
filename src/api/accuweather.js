@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://dataservice.accuweather.com",
+  baseURL: "https://dataservice.accuweather.com",
   params: {
     apikey: process.env.REACT_APP_ACCUWEATHER_API_KEY,
   },
