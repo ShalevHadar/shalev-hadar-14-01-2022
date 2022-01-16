@@ -1,14 +1,14 @@
 import * as React from "react";
 import Stack from "@mui/material/Stack";
-import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { Snackbar } from "@mui/material";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export function useCustomizedSnackbar(message, severity) {
-  const [open, setOpen] = React.useState(true);
+export function NotificationSnackBar({ message, severity, active }) {
+  const [open, setOpen] = React.useState(active);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
