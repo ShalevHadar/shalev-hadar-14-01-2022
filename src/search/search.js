@@ -1,14 +1,22 @@
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import * as accuweather from "../api/accuweather";
 import { clearActiveCity, setActiveCity } from "../city/city-slice";
 import { useDebounceTime } from "../components/debounce";
+import { useCustomizedSnackbar } from "../components/use-snack-bar";
+import { validate } from "../components/validate-regex";
 
 export function Search() {
   const [options, setOptions] = useState([]);
   const [val, setDebounced] = useDebounceTime(450);
+  const [errorMsg, setErrorMsg] = useState("");
   const dispatch = useDispatch();
+
+  const mySnack = useCustomizedSnackbar(
+    "API fail, please enter another key",
+    "error"
+  );
 
   useEffect(() => {
     if (val) {
@@ -36,8 +44,11 @@ export function Search() {
 
   // on input, get autocomplete by the value
   const handleInputChange = async (event, value, reason) => {
-    if (reason === "input") {
+    if (reason === "input" && validate(value)) {
+      setErrorMsg("");
       setDebounced(value);
+    } else {
+      setErrorMsg("Only english letters are allowed");
     }
   };
 
@@ -61,6 +72,9 @@ export function Search() {
 
   return (
     <div>
+      <Typography sx={{ display: "flex", color: "red" }}>
+        {errorMsg} <span style={{ color: "white" }}>_</span>
+      </Typography>
       <Autocomplete
         id="search-city-input"
         options={options}

@@ -8,6 +8,7 @@ import { useFiveDaysForecast } from "../use-five-days-forecast";
 import { DayForecastCard } from "../favorites-page/day-forecast-card";
 import { ToggleFavorite } from "./toggle-favorite-button";
 import { CardList } from "../components/card-list";
+import { useCustomizedSnackbar } from "../components/use-snack-bar";
 
 export function City() {
   const { activeCityId, activeCity } = useSelector((state) => ({
@@ -16,10 +17,18 @@ export function City() {
   }));
   const forecast = useFiveDaysForecast(activeCityId);
   const currentWeather = useCurrentWeather(activeCityId);
+  const mySnack = useCustomizedSnackbar(
+    "API fail, please enter another key",
+    "error"
+  );
   const loading = !currentWeather || !forecast;
 
-  if (!activeCity) {
-    return null;
+  if (!(forecast && currentWeather)) {
+    return (
+      <Typography variant="h4">
+        Failure: please insert another API key {mySnack}
+      </Typography>
+    );
   }
 
   if (loading) {

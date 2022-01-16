@@ -5,8 +5,16 @@ const apiClient = axios.create({
   params: {
     apikey: process.env.REACT_APP_ACCUWEATHER_API_KEY,
   },
-  validateStatus: (status) => status < 400,
+  //validateStatus: (status) => status < 400,
 });
+
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    // whatever you want to do with the error
+    throw error;
+  }
+);
 
 export async function autocomplete(query) {
   const mock = autocompleteMock.filter(

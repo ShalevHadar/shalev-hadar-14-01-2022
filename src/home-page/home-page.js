@@ -7,7 +7,7 @@ import { Box } from "@mui/system";
 export function Homepage() {
   return (
     <Layout>
-      <Box sx={{ mt: 5 }}>
+      <Box sx={{ mt: 3 }}>
         <Search />
       </Box>
       <Box sx={{ mt: 3 }}>
