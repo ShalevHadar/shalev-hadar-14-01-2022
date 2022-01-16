@@ -1,8 +1,4 @@
 export const validate = (text) => {
-  let reg = /^\w+[a-zA-Z_ ]*$/;
-  if (reg.test(text) === false) {
-    return false;
-  } else {
-    return true;
-  }
+  let reg = /^[a-zA-Z.,()-\s]*$/;
+  return reg.test(text);
 };
