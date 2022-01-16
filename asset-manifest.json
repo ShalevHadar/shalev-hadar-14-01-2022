@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/shalev-hadar-14-01-2022/static/css/main.93a0497a.css",
+    "main.js": "/shalev-hadar-14-01-2022/static/js/main.de9a6c51.js",
+    "static/js/787.e7828fba.chunk.js": "/shalev-hadar-14-01-2022/static/js/787.e7828fba.chunk.js",
+    "index.html": "/shalev-hadar-14-01-2022/index.html",
+    "main.93a0497a.css.map": "/shalev-hadar-14-01-2022/static/css/main.93a0497a.css.map",
+    "main.de9a6c51.js.map": "/shalev-hadar-14-01-2022/static/js/main.de9a6c51.js.map",
+    "787.e7828fba.chunk.js.map": "/shalev-hadar-14-01-2022/static/js/787.e7828fba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.93a0497a.css",
+    "static/js/main.de9a6c51.js"
+  ]
+}
