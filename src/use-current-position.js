@@ -6,23 +6,21 @@ export function useCurrentPosition() {
   const [error, setError] = useState();
 
   useEffect(() => {
-    try {
-      window.navigator.geolocation.getCurrentPosition(
-        async (position) => {
+    window.navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
           const { latitude, longitude } = position.coords;
           const { data } = await getCurrentLocation(latitude, longitude);
           setLocation({
             id: data.Key,
             name: data.LocalizedName,
           });
-          console.log(data);
-          console.log(location);
-        },
-        (err) => console.log(err)
-      );
-    } catch (error) {
-      setError(`Couldn't load current city weather`);
-    }
+        } catch (error) {
+          setError(`Couldn't load current city weather`);
+        }
+      },
+      (err) => console.log(err)
+    );
   }, []);
 
   return { location, error };
