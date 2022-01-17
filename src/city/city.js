@@ -1,7 +1,7 @@
 import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CityDetails } from "./city-details";
 import { useCurrentWeather } from "../use-current-weather";
 import { useFiveDaysForecast } from "../use-five-days-forecast";
@@ -9,18 +9,26 @@ import { DayForecastCard } from "../favorites-page/day-forecast-card";
 import { ToggleFavorite } from "./toggle-favorite-button";
 import { CardList } from "../components/card-list";
 import { NotificationSnackBar } from "../components/notification-snack-bar";
+import { useCurrentPosition } from "../use-current-position";
+import { setActiveCity } from "./city-slice";
 
 export function City() {
+  const dispatch = useDispatch();
   const { activeCityId, activeCity } = useSelector((state) => ({
     activeCityId: state.city.activeCityId,
     activeCity: state.city.cities[state.city.activeCityId],
   }));
+  const { location, error: errorCurrentPosition } = useCurrentPosition();
   const { forecast, error: errorForecast } = useFiveDaysForecast(activeCityId);
   const { currentWeather, error: errorCurrentWeather } =
     useCurrentWeather(activeCityId);
-  const error = errorForecast || errorCurrentWeather;
-  const loading = !currentWeather || !forecast;
-  
+
+  const error = errorForecast || errorCurrentWeather || errorCurrentPosition;
+  const loading = !currentWeather || !forecast || !location;
+
+  if (!activeCity && location) {
+    dispatch(setActiveCity({ id: location.id, name: location.name }));
+  }
 
   if (error) {
     return (

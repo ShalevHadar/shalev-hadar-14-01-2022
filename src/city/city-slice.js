@@ -1,14 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// window.navigator.geolocation.getCurrentPosition(
-//   (position) => console.log(position.coords),
-//   (err) => console.log(err)
-// );
-
 const initialState = {
-  activeCityId: 215854,
+  activeCityId: null,
   favorites: [],
-  cities: { 215854: { id: 215854, name: "Tel Aviv" } }, // id, name
+  cities: {},
 };
 
 export const citySlice = createSlice({

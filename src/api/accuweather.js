@@ -8,13 +8,28 @@ const apiClient = axios.create({
   validateStatus: (status) => status < 400,
 });
 
-export async function autocomplete(query) {
-  const mock = autocompleteMock.filter(
-    (item) =>
-      item.LocalizedName.indexOf(query) ||
-      item.Country.LocalizedName.indexOf(query)
+export async function getCurrentLocation(lat, long) {
+  // console.log("poke");
+  // return locationMock;
+  const response = await apiClient.get(
+    "locations/v1/cities/geoposition/search",
+    {
+      params: {
+        q: `${lat},${long}`,
+      },
+    }
   );
-  return { data: mock };
+
+  return response;
+}
+
+export async function autocomplete(query) {
+  // const mock = autocompleteMock.filter(
+  //   (item) =>
+  //     item.LocalizedName.indexOf(query) ||
+  //     item.Country.LocalizedName.indexOf(query)
+  // );
+  // return { data: mock };
   const response = await apiClient.get("locations/v1/cities/autocomplete", {
     params: {
       q: query,
@@ -24,13 +39,13 @@ export async function autocomplete(query) {
 }
 
 export async function getCurrentWeather(key) {
-  return { data: cityMock };
+  // return { data: cityMock };
   const response = await apiClient.get(`currentconditions/v1/${key}`);
   return response;
 }
 
 export async function getFiveDaysDailyForecast(key, metric = true) {
-  return { data: fiveDaysDailyForecastMock };
+  // return { data: fiveDaysDailyForecastMock };
   const response = await apiClient.get(`forecasts/v1/daily/5day/${key}`, {
     params: {
       metric,
@@ -38,6 +53,74 @@ export async function getFiveDaysDailyForecast(key, metric = true) {
   });
   return response;
 }
+
+const locationMock = {
+  Version: 1,
+  Key: "215836",
+  Type: "City",
+  Rank: 55,
+  LocalizedName: "Givatayim",
+  EnglishName: "Givatayim",
+  PrimaryPostalCode: "",
+  Region: {
+    ID: "MEA",
+    LocalizedName: "Middle East",
+    EnglishName: "Middle East",
+  },
+  Country: {
+    ID: "IL",
+    LocalizedName: "Israel",
+    EnglishName: "Israel",
+  },
+  AdministrativeArea: {
+    ID: "TA",
+    LocalizedName: "Tel Aviv",
+    EnglishName: "Tel Aviv",
+    Level: 1,
+    LocalizedType: "District",
+    EnglishType: "District",
+    CountryID: "IL",
+  },
+  TimeZone: {
+    Code: "IST",
+    Name: "Asia/Jerusalem",
+    GmtOffset: 2,
+    IsDaylightSaving: false,
+    NextOffsetChange: "2022-03-25T00:00:00Z",
+  },
+  GeoPosition: {
+    Latitude: 32.069,
+    Longitude: 34.811,
+    Elevation: {
+      Metric: {
+        Value: 73,
+        Unit: "m",
+        UnitType: 5,
+      },
+      Imperial: {
+        Value: 239,
+        Unit: "ft",
+        UnitType: 0,
+      },
+    },
+  },
+  IsAlias: false,
+  ParentCity: {
+    Key: "215854",
+    LocalizedName: "Tel Aviv",
+    EnglishName: "Tel Aviv",
+  },
+  SupplementalAdminAreas: [],
+  DataSets: [
+    "AirQualityCurrentConditions",
+    "AirQualityForecasts",
+    "Alerts",
+    "DailyPollenForecast",
+    "ForecastConfidence",
+    "FutureRadar",
+    "MinuteCast",
+  ],
+};
 
 const autocompleteMock = [
   {
