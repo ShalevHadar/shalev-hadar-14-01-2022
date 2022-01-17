@@ -3,6 +3,7 @@ import {
   CardContent,
   CardMedia,
   CircularProgress,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -21,28 +22,30 @@ export function FavoriteCard({ city, onClick }) {
   }
 
   return (
-    <Card variant="outlined" onClick={onClick} sx={{ width: "184px" }}>
-      <CardContent
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Typography variant="h6" textAlign="center">
-          {city.name}
-        </Typography>
-        <Typography sx={{ mt: ".5rem", mb: "0.2rem" }}>
-          {currentWeather.temperature.celsius}&deg;
-        </Typography>
-        <CardMedia
-          component="img"
-          image={`/assets/${currentWeather.icon}.png`}
-          sx={{ width: 110 }}
-        />
-        <Typography>{currentWeather?.description}</Typography>
-      </CardContent>
-    </Card>
+    <Tooltip title="Click me for 5 days forecast" followCursor>
+      <Card variant="outlined" onClick={onClick} sx={{ width: "184px" }}>
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h6" textAlign="center">
+            {city.name}
+          </Typography>
+          <Typography sx={{ mt: ".5rem", mb: "0.2rem" }}>
+            {currentWeather.temperature.celsius}&deg;
+          </Typography>
+          <CardMedia
+            component="img"
+            image={`/assets/${currentWeather.icon}.png`}
+            sx={{ width: 110 }}
+          />
+          <Typography>{currentWeather?.description}</Typography>
+        </CardContent>
+      </Card>
+    </Tooltip>
   );
 }
