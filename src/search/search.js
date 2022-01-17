@@ -79,7 +79,7 @@ export function Search() {
   return (
     <div>
       <Typography sx={{ display: "flex", color: "red" }}>
-        {errorMsg} <span style={{ color: "white" }}>_</span>
+        {errorMsg} <span></span>
       </Typography>
       <Autocomplete
         id="search-city-input"
