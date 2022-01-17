@@ -32,9 +32,6 @@ export function FavoritesPage() {
             <>
               {favorites.map((id) => (
                 <FavoriteCard
-                  onChangeActive={(event, newHover) => {
-                    console.log(event, newHover);
-                  }}
                   city={cities[id]}
                   key={id}
                   onClick={() => handleSelect(id)}
