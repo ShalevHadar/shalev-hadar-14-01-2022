@@ -9,8 +9,7 @@ const apiClient = axios.create({
 });
 
 export async function getCurrentLocation(lat, long) {
-  // console.log("poke");
-  // return locationMock;
+  // return { data: locationMock };
   const response = await apiClient.get(
     "locations/v1/cities/geoposition/search",
     {
