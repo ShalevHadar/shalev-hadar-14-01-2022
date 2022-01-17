@@ -45,13 +45,17 @@ export function Search() {
 
   // on input, get autocomplete by the value
   const handleInputChange = async (event, value, reason) => {
-    setErrorMsg(undefined);
     if (reason === "input" && validate(value)) {
+      setErrorMsg(undefined);
       setError(undefined);
       setDebounced(value);
-    } else {
-      setErrorMsg("Only english letters are allowed");
+      return;
     }
+    if (reason === "clear" || reason === "reset") {
+      setErrorMsg(undefined);
+      return;
+    }
+    setErrorMsg("Only english letters are allowed");
   };
 
   // after pick, move city (key & value to )
