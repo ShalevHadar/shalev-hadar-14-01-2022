@@ -3,13 +3,13 @@ import { Box } from "@mui/system";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CityDetails } from "./city-details";
-import { useCurrentWeather } from "../use-current-weather";
-import { useFiveDaysForecast } from "../use-five-days-forecast";
-import { DayForecastCard } from "../favorites-page/day-forecast-card";
+import { useCurrentWeather } from "../hooks/use-current-weather";
+import { useFiveDaysForecast } from "../hooks/use-five-days-forecast";
+import { DayForecastCard } from "../components/day-forecast-card";
 import { ToggleFavorite } from "./toggle-favorite-button";
 import { CardList } from "../components/card-list";
 import { NotificationSnackBar } from "../components/notification-snack-bar";
-import { useCurrentPosition } from "../use-current-position";
+import { useCurrentPosition } from "../hooks/use-current-position";
 import { setActiveCity } from "./city-slice";
 
 export function City() {

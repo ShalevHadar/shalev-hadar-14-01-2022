@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCurrentWeather } from "./api/accuweather";
+import { getCurrentWeather } from "../api/accuweather";
 
 export function useCurrentWeather(cityId) {
   const [currentWeather, setCurrentWeather] = useState();

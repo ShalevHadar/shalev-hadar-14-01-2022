@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { useCurrentWeather } from "../use-current-weather";
+import { useCurrentWeather } from "../hooks/use-current-weather";
 
 export function FavoriteCard({ city, onClick }) {
   const { currentWeather, error } = useCurrentWeather(city.id);

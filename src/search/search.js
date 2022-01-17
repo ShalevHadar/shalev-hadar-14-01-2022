@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import * as accuweather from "../api/accuweather";
 import { clearActiveCity, setActiveCity } from "../city/city-slice";
-import { useDebounceTime } from "../components/debounce";
+import { useDebounceTime } from "../hooks/use-debounce";
 import { NotificationSnackBar } from "../components/notification-snack-bar";
 import { validate } from "../components/validate-regex";
 

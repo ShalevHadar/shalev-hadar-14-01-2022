@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getFiveDaysDailyForecast } from "./api/accuweather";
+import { getFiveDaysDailyForecast } from "../api/accuweather";
 
 export function useFiveDaysForecast(cityId) {
   const [forecast, setForecast] = useState();

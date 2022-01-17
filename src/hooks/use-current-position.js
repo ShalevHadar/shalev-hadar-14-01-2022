@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCurrentLocation } from "./api/accuweather";
+import { getCurrentLocation } from "../api/accuweather";
 
 export function useCurrentPosition() {
   const [location, setLocation] = useState();
