@@ -16,7 +16,7 @@ const apiClient = axios.create({
 
 export async function getCurrentLocation(lat, long) {
   // use mock
-  return { data: locationMock };
+  // return { data: locationMock };
 
   // use API
   const response = await apiClient.get(
@@ -33,12 +33,12 @@ export async function getCurrentLocation(lat, long) {
 
 export async function autocomplete(query) {
   // use mock
-  const mock = autocompleteMock.filter(
-    (item) =>
-      item.LocalizedName.indexOf(query) ||
-      item.Country.LocalizedName.indexOf(query)
-  );
-  return { data: mock };
+  // const mock = autocompleteMock.filter(
+  //   (item) =>
+  //     item.LocalizedName.indexOf(query) ||
+  //     item.Country.LocalizedName.indexOf(query)
+  // );
+  // return { data: mock };
 
   // use API
   const response = await apiClient.get("locations/v1/cities/autocomplete", {
@@ -51,7 +51,7 @@ export async function autocomplete(query) {
 
 export async function getCurrentWeather(key) {
   // use mock
-  return { data: cityMock };
+  // return { data: cityMock };
 
   // use API
   const response = await apiClient.get(`currentconditions/v1/${key}`);
@@ -60,7 +60,7 @@ export async function getCurrentWeather(key) {
 
 export async function getFiveDaysDailyForecast(key, metric = true) {
   // use mock
-  return { data: fiveDaysDailyForecastMock };
+  // return { data: fiveDaysDailyForecastMock };
 
   // use API
   const response = await apiClient.get(`forecasts/v1/daily/5day/${key}`, {
