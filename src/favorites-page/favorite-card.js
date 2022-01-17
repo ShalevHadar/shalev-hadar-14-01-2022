@@ -22,7 +22,7 @@ export function FavoriteCard({ city, onClick }) {
   }
 
   return (
-    <Tooltip title="Click me for 5 days forecast" followCursor>
+    <Tooltip title="Click the card for 5 days forecast" followCursor>
       <Card variant="outlined" onClick={onClick} sx={{ width: "184px" }}>
         <CardContent
           sx={{
