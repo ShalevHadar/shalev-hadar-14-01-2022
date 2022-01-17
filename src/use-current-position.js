@@ -19,7 +19,12 @@ export function useCurrentPosition() {
           setError(`Couldn't load current city weather`);
         }
       },
-      (err) => console.log(err)
+      (err) => {
+        setLocation({
+          id: 215854,
+          name: "Tel Aviv",
+        });
+      }
     );
   }, []);
 
