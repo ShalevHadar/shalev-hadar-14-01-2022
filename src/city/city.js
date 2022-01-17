@@ -16,7 +16,8 @@ export function City() {
     activeCity: state.city.cities[state.city.activeCityId],
   }));
   const { forecast, error: errorForecast } = useFiveDaysForecast(activeCityId);
-  const { currentWeather, error: errorCurrentWeather } =useCurrentWeather(activeCityId);
+  const { currentWeather, error: errorCurrentWeather } =
+    useCurrentWeather(activeCityId);
   const error = errorForecast || errorCurrentWeather;
   const loading = !currentWeather || !forecast;
 
@@ -38,35 +39,37 @@ export function City() {
   }
 
   return (
-    <Card variant="outlined">
-      <CardContent>
-        <Box
-          component="header"
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <CityDetails city={activeCity} currentWeather={currentWeather} />
-          <ToggleFavorite cityId={activeCityId} />
-        </Box>
+    <>
+      <Card variant="outlined">
+        <CardContent>
+          <Box
+            component="header"
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <CityDetails city={activeCity} currentWeather={currentWeather} />
+            <ToggleFavorite cityId={activeCityId} />
+          </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            mt: 10,
-            mb: 10,
-          }}
-        >
-          <Typography variant="h4">{currentWeather.description}</Typography>
-        </Box>
-        <CardList>
-          {forecast.map((day) => (
-            <DayForecastCard key={day.date} day={day} />
-          ))}
-        </CardList>
-      </CardContent>
-    </Card>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              mt: 10,
+              mb: 10,
+            }}
+          >
+            <Typography variant="h4">{currentWeather.description}</Typography>
+          </Box>
+          <CardList>
+            {forecast.map((day) => (
+              <DayForecastCard key={day.date} day={day} />
+            ))}
+          </CardList>
+        </CardContent>
+      </Card>
+    </>
   );
 }

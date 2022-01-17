@@ -6,6 +6,7 @@ import { FavoriteCard } from "./favorite-card";
 import { setActiveCity } from "../city/city-slice";
 import { useNavigate } from "react-router-dom";
 import { CardList } from "../components/card-list";
+import { Typography } from "@mui/material";
 
 export function FavoritesPage() {
   const favorites = useSelector((state) => state.city.favorites);
@@ -25,13 +26,22 @@ export function FavoritesPage() {
     <Layout>
       <Box sx={{ mt: 5 }}>
         <CardList>
-          {favorites.map((id) => (
-            <FavoriteCard
-              city={cities[id]}
-              key={id}
-              onClick={() => handleSelect(id)}
-            />
-          ))}
+          {favorites.length === 0 ? (
+            <Typography variant="h5">There's no cities in favorites</Typography>
+          ) : (
+            <>
+              {favorites.map((id) => (
+                <FavoriteCard
+                  onChangeActive={(event, newHover) => {
+                    console.log(event, newHover);
+                  }}
+                  city={cities[id]}
+                  key={id}
+                  onClick={() => handleSelect(id)}
+                />
+              ))}
+            </>
+          )}
         </CardList>
       </Box>
     </Layout>
