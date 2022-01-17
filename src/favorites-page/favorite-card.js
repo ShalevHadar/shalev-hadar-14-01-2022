@@ -9,7 +9,7 @@ import React from "react";
 import { useCurrentWeather } from "../use-current-weather";
 
 export function FavoriteCard({ city, onClick }) {
-  const { cityWeather: currentWeather, error } = useCurrentWeather(city.id);
+  const { currentWeather, error } = useCurrentWeather(city.id);
   const loading = !currentWeather;
 
   if (!city || error) {
