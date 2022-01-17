@@ -33,7 +33,6 @@ export function Layout({ children }) {
             <Button
               sx={{ textTransform: "none", color: "#fff" }}
               variant="text"
-              color="secondary"
               onClick={() => navigate("/favorites")}
             >
               Favorites

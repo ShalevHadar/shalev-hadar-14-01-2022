@@ -20,6 +20,7 @@ export function City() {
     useCurrentWeather(activeCityId);
   const error = errorForecast || errorCurrentWeather;
   const loading = !currentWeather || !forecast;
+  
 
   if (error) {
     return (
