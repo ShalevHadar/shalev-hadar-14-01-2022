@@ -50,7 +50,6 @@ export async function autocomplete(query) {
 }
 
 export async function getCurrentWeather(key) {
-  throw new Error();
   // use mock
   // return { data: cityMock };
 
