@@ -32,14 +32,16 @@ export function City() {
 
   if (error) {
     return (
-      <>
-        <NotificationSnackBar
-          message={error}
-          severity="error"
-          active={Boolean(error)}
-        />
-        <Typography variant="h4">{error}</Typography>
-      </>
+      <Card>
+        <CardContent>
+          <NotificationSnackBar
+            message={error}
+            severity="error"
+            active={Boolean(error)}
+          />
+          <Typography variant="h4">{error}</Typography>
+        </CardContent>
+      </Card>
     );
   }
 
